@@ -20,19 +20,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 
 private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
+    primary = Purple200,
+    primaryVariant = Purple700,
+    secondary = Teal200
 )
 
 private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
+    primary = Purple500,
+    primaryVariant = Purple700,
+    secondary = Teal200
 
-        /* Other default colors to override
+    /* Other default colors to override
     background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,
@@ -42,18 +43,36 @@ private val LightColorPalette = lightColors(
     */
 )
 
+private val LightElevation = Elevations()
+
+private val DarkElevation = Elevations(card = 1.dp)
+
 @Composable
-fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun PuppyAdoptionTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable() () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
     }
 
+    val elevation = if (darkTheme) DarkElevation else LightElevation
+
     MaterialTheme(
         colors = colors,
-        typography = typography,
-        shapes = shapes,
+        typography = Typography,
+        shapes = Shapes,
         content = content
     )
+}
+
+object PuppyAdoptionTheme {
+    /**
+     * Retrieves the current [Elevations] at the call site's position in the hierarchy.
+     */
+    val elevations: Elevations
+        @Composable
+        get() = LocalElevations.current
 }
