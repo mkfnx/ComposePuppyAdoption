@@ -51,8 +51,6 @@ fun NavGraph(startDestination: String = MainDestinations.PUPPIES_LIST) {
                 }
             )
         ) { backStackEntry ->
-            val arguments = requireNotNull(backStackEntry.arguments)
-            val id =  arguments.getInt(MainDestinations.PUPPY_DETAIL_ID_KEY, -1)
             PuppyDetails()
         }
     }
